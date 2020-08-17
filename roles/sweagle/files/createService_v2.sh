@@ -15,7 +15,7 @@ function startService() {
 	sleep 0.5
 	sudo service ${serviceName} status | grep -A 3 "Active:"
 
-	echo "List of sweagl services"
+	echo "List of sweagle services"
 	sleep 0.5
 	sudo systemctl | grep -i sweagl
 }
@@ -45,11 +45,13 @@ function writeServiceFile() {
 	fi
 
 	if [ "$newrelic" == "true" ] || [ "$newrelic" == "TRUE" ] || [ "$newrelic" == "True" ]; then
-		if [ ! -f "/opt/SWEAGLE/monitoring/newrelic/newrelic.jar" ]; then
+		# Retrieve sweagle installation folder from component path by removing last 2 directories
+		pathToSweagle=$(echo $pathToComponent | rev | cut -d'/' -f3- | rev)
+		if [ ! -f "$pathToSweagle/monitoring/newrelic/newrelic.jar" ]; then
 			echo "Newrelic not found"
 			exit 1
 		else
-			locArg="$locArg -javaagent:/opt/SWEAGLE/monitoring/newrelic/newrelic.jar"
+			locArg="$locArg -javaagent:$pathToSweagle/monitoring/newrelic/newrelic.jar"
 		fi
 	fi
 
@@ -116,9 +118,13 @@ function validateInput() {
 		errorOccurred="true"
 	fi
 
-	if [ "$newrelic" == "true" ] || [ "$newrelic" == "TRUE" ] || [ "$newrelic" == "True" ] && [ ! -f "/opt/SWEAGLE/monitoring/newrelic/newrelic.jar" ]; then
-		echo "Newrelic not found"
-		errorOccurred="true"
+	if [ "$newrelic" == "true" ] || [ "$newrelic" == "TRUE" ] || [ "$newrelic" == "True" ]; then
+		# Retrieve sweagle installation folder from component path by removing last 2 directories
+		pathToSweagle=$(echo $pathToComponent | rev | cut -d'/' -f3- | rev)
+		if [ ! -f "$pathToSweagle/monitoring/newrelic/newrelic.jar" ]; then
+			echo "Newrelic not found"
+			errorOccurred="true"
+		fi
 	fi
 
 	if [ "$#" -ge 5 ] || [ "$#" -le 6 ]; then

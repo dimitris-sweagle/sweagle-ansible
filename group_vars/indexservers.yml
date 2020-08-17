@@ -1,7 +1,8 @@
 ---
 jdk_install_dir: "{{ root_installation_folder }}/jdk"
 
-es_version: "6.8.6"
+#es_version: "6.8.6"
+es_version: "7.1.1"
 es_data_dirs:
   - "{{ root_installation_folder }}/elasticsearch/data"
 es_log_dir: "{{ root_installation_folder }}/elasticsearch/log"

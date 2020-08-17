@@ -72,12 +72,12 @@
 - name: disable selinux at runtime
   shell: setenforce 0
   become: true
-  when: ansible_selinux.status != 'disabled'
+  when: ansible_os_family == 'RedHat' and ansible_selinux.status != 'disabled'
   tags: system
 
 - name: disable selinux permanently
   selinux:
     state: disabled
   become: true
-  when: ansible_selinux is defined and ansible_selinux != False
+  when: ansible_os_family == 'RedHat' and ansible_selinux is defined and ansible_selinux != False
   tags: system

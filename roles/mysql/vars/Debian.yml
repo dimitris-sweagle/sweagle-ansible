@@ -3,5 +3,6 @@ mysql_daemon: mysql
 mysql_packages: ['mysql-server', 'mysql-common', 'python-mysqldb']
 
 mysql_config_dir: "/etc/mysql"
+mysql_socket: /var/lib/mysql/mysql.sock
 #mysql_log_dir: "/var/log/mysql"
 #mysql_log_error: "{{ mysql_log_dir}}/error.log"

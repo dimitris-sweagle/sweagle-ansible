@@ -67,7 +67,8 @@
     force: '{{ force_install }}'
     allow_unauthenticated: "{{ 'no' if es_apt_key else 'yes' }}"
     cache_valid_time: 86400
-  when: es_use_repository
+    #dpkg_options: "force-confdef,force-confold,allow-downgrades"
+  when: es_use_repository and not ansible_check_mode
   register: debian_elasticsearch_install_from_repo
   notify: restart elasticsearch
   environment:

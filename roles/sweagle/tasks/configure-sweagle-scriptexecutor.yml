@@ -4,6 +4,7 @@
     src: "{{ sweagle_version }}/scriptexecutor-application.yml.j2"
     dest: "{{ sweagle_installation_folder }}/bin/scriptExecutor/application.yml"
   tags: [ sweagle, sweagle-scriptexecutor ]
+  become: true
 
 - name: Create service scriptexecutor
   shell: "{{ sweagle_installation_folder }}/scripts/createService.sh sweagleScriptExecutor {{ sweagle_installation_folder }}/bin/scriptExecutor script-executor-{{ sweagle_version }}.jar {{ sweagle_scriptexecutor_xmx }}"

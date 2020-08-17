@@ -23,7 +23,7 @@
   with_items:
     - "{{ sweagle_mongo_db }}"
     - admin
-  when: user_output.rc != 0
+  when: not ansible_check_mode and user_output.rc != 0
   tags: [ mongodb, sweagle, sweagle-mongodb ]
 
 #- name: Create MongoDB SWEAGLE user
@@ -43,7 +43,7 @@
 
 - name: Create MongoDB SWEAGLE Users
   shell: mongo "{{ inventory_hostname }}:{{ mongodb_net_port }}/{{ sweagle_mongo_db }}" --eval 'printjson(db.createUser({ user:"{{ sweagle_mongo_user }}", pwd:"{{ sweagle_mongo_password }}", roles:[{ role:"readWrite", db:"{{ sweagle_mongo_db }}"}]}))'
-  when: user_output.rc != 0
+  when: not ansible_check_mode and user_output.rc != 0
   tags: [ mongodb, sweagle, sweagle-mongodb ]
 
 #- name: Copy SWEAGLE mongod.conf

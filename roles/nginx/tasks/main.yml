@@ -54,3 +54,4 @@
 - name: Configure SWEAGLE website
   include_tasks: configure-sweagle.yml
   tags: [ nginx, sweagle, sweagle-web ]
+  when: not ansible_check_mode

@@ -31,11 +31,13 @@
     environment:
       ES_PATH_CONF: "{{ es_conf_dir }}"
     check_mode: no
+    when: not ansible_check_mode
 
   - name: Create Bootstrap password for elastic user
     become: yes
-    shell: echo "{{es_api_basic_auth_password}}" | {{es_home}}/bin/elasticsearch-keystore add -x 'bootstrap.password'
+    shell: echo "{{es_api_basic_auth_password}}" | {{es_home}}/bin/elasticsearch-keystore add -xf 'bootstrap.password'
     when:
+      - not ansible_check_mode
       - es_api_basic_auth_username is defined and list_keystore is defined and es_api_basic_auth_username == 'elastic' and 'bootstrap.password' not in list_keystore.stdout_lines
     environment:
       ES_PATH_CONF: "{{ es_conf_dir }}"

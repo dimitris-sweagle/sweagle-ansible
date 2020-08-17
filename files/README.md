@@ -43,7 +43,7 @@ Create a folder for these components to put their packages
       - nginx-1.14.2-1.el7_4.ngx.x86_64
 
 - sweagle: you should have
-      /full-{{YOUR VERSION}}.zip
+      /full_{{YOUR VERSION}}.zip
       /upgrade-{{YOUR VERSION}}.zip (if you just want to upgrade an existing installation)
       /sweagle.key (to enable SSL, this is your private key file)
       /sweagle.pem (to enable SSL, this is your public certificate key)

@@ -19,20 +19,20 @@
 
 - name: "Check if SWEAGLE package is in {{ playbook_dir }}/files/sweagle"
   stat:
-    path: "{{ playbook_dir }}/files/sweagle/full-{{ sweagle_version}}.zip"
+    path: "{{ playbook_dir }}/files/sweagle/full_{{ sweagle_version}}.zip"
   register: sweagleFile
   tags: [ nginx, sweagle, sweagle-web ]
 
-- name: Unzip package "full-{{ sweagle_version }}.zip from local
+- name: Unzip package "full_{{ sweagle_version }}.zip from local
   unarchive:
-    src: "../../../files/sweagle/full-{{ sweagle_version}}.zip"
+    src: "../../../files/sweagle/full_{{ sweagle_version}}.zip"
     dest: /tmp
   when: sweagleFile.stat.exists
   tags: [ nginx, sweagle, sweagle-web ]
 
-- name: Unzip package "full-{{ sweagle_version }}.zip"
+- name: Unzip package "full_{{ sweagle_version }}.zip"
   unarchive:
-    src: "../../sweagle/files/full-{{ sweagle_version}}.zip"
+    src: "../../sweagle/files/full_{{ sweagle_version}}.zip"
     dest: /tmp
   when: not sweagleFile.stat.exists
   tags: [ nginx, sweagle, sweagle-web ]

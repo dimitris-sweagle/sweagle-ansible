@@ -96,6 +96,7 @@
   changed_when: false
   check_mode: false
   tags: mysql
+  when: not ansible_check_mode
 
 - name: Include MySQL configuration.yml
   include_tasks: configure.yml

@@ -19,6 +19,7 @@
     - vault
   become: true
   tags: [mysql, sweagle, sweagle-mysql]
+  when: not ansible_check_mode
 
 #- name: Grant all privileges on SWEAGLE MySQL schemas to "{{ sweagle_mysql_user }}" for Red Hat
 #  shell: >
@@ -49,6 +50,7 @@
     - vault
   become: true
   tags: [mysql, sweagle, sweagle-mysql]
+  when: not ansible_check_mode
 
 - name: Flush privileges
   shell: >
@@ -56,4 +58,5 @@
     --execute="FLUSH PRIVILEGES;"
   become: true
   tags: [mysql, sweagle, sweagle-mysql]
+  when: not ansible_check_mode
 #    mysql --host={{ mysql_bind_address }} --user={{ mysql_root_user }} --password={{ mysql_root_password }}

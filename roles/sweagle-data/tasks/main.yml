@@ -98,3 +98,4 @@
     chdir: "{{ sweagle_installation_folder }}/scripts"
   ignore_errors: true
   tags: [ sweagle, sweagle-data ]
+  when: not ansible_check_mode

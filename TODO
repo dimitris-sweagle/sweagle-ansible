@@ -1,0 +1,16 @@
+[MYSQL]
+it seems mysql does not allow connection for root on localhost on further runs
+of ansible
+  => not idempotent
+  Error: Access denied for user 'root'@'localhost' (using password: NO)
+
+[ELASTICSEARCH]
+permission on /opt/elasticsearch/conf/elasticsearch.keystore are incorrect and
+prevented restart of the sweagle_service_nameMaybe just an order issue as the
+code is there in xpack to set the correct ownship
+
+[SWEAGLE]
+Create service core (version>=3.13) does not seem to create the sweagleCore.service
+but running the command manually seems to
+
+Same with starting it

@@ -56,6 +56,8 @@
 
 - name: Copy content to installation folder
   tags: [ sweagle, sweagle-core, sweagle-scriptexecutor, sweagle-taskrunner ]
+  when: not ansible_check_mode
+  become: true
   block:
     - name: Try with synchronize
       synchronize:
@@ -83,6 +85,7 @@
     regexp: '\d+\.\d+\.\d+'
     replace: "{{ sweagle_version }}"
   tags: [ sweagle, sweagle-core, sweagle-ml, sweagle-scriptexecutor, sweagle-taskrunner ]
+  when: not ansible_check_mode
 
 - name: Make shell scripts in "{{ sweagle_installation_folder }}/scripts" executable
   file:
@@ -90,12 +93,16 @@
     mode: a+x
     recurse: yes
   tags: [ sweagle, sweagle-core, sweagle-ml, sweagle-scriptexecutor, sweagle-taskrunner ]
+  when: not ansible_check_mode
+  become: yes
 
 - name: Configure appConfig.settings
   template:
     src: "{{ sweagle_version }}/appConfig.settings.j2"
     dest: "{{ sweagle_installation_folder }}/scripts/config/appConfig.settings"
   tags: [ sweagle, sweagle-core, sweagle-ml, sweagle-scriptexecutor, sweagle-taskrunner ]
+  when: not ansible_check_mode
+  become: yes
 
 #- name: Configure ml
 #  include_tasks: configure-sweagle-ml.yml

@@ -23,7 +23,7 @@ mysql_system_user: "mysql"
 ###################################################
 ###   MONGODB
 ###################################################
-mongodb_version: "3.6"
+mongodb_version: "4.0"
 ## comma seperated list for other mongodb bind IPs
 ## see https://www.mkyong.com/mongodb/mongodb-allow-remote-access/
 mongodb_net_bindip: "127.0.0.1,{% for host in groups['mongodb'] %}{{ hostvars[host].ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) }}{% if not loop.last %},{% endif %}{% endfor %}"

@@ -10,13 +10,13 @@
     prompt: "Please paste your vault token"
     echo: true
   register: result
-  when: sweagle_vault_token is undefined or sweagle_vault_token == ""
+  when: not ansible_check_mode and ( sweagle_vault_token is undefined or sweagle_vault_token == "" )
   tags: [ sweagle, sweagle-core ]
 
 - name: Set vault token
   set_fact:
     sweagle_vault_token: "{{ result.user_input }}"
-  when: sweagle_vault_token is undefined or sweagle_vault_token == ""
+  when: not ansible_check_mode and ( sweagle_vault_token is undefined or sweagle_vault_token == "" )
   tags: [ sweagle, sweagle-core ]
 
 - name: Get user input - License key
@@ -38,6 +38,7 @@
     src: "{{ sweagle_version }}/core-application.yml.j2"
     dest: "{{ sweagle_installation_folder }}/bin/core/application.yml"
   tags: [ sweagle, sweagle-core ]
+  become: true
 
 - name: Create JDBC lib installation folder "{{ sweagle_installation_folder }}/bin/core/libs" (version>=3.13)
   file:
@@ -47,6 +48,7 @@
     group: "{{ sweagle_system_group }}"
   when: sweagle_version is version_compare('3.13', '>=')
   tags: [ sweagle, sweagle-core ]
+  become: true
 
 - name: Untar JDBC driver package (version>=3.13)
   unarchive:
@@ -54,8 +56,9 @@
     dest: "{{ sweagle_installation_folder }}/bin/core/libs"
     extra_opts: ['--strip-components=1']
   with_items: "{{ lookup('fileglob', '../../../files/mysql-jdbc/mysql*.gz').split(',') | sort }}"
-  when: sweagle_version is version_compare('3.13', '>=')
+  when: not ansible_check_mode and sweagle_version is version_compare('3.13', '>=')
   tags: [ sweagle, sweagle-core ]
+  become: true
 
 - name: Copy script to create service core (version>=3.13)
   copy:
@@ -66,6 +69,7 @@
     owner: "{{ sweagle_system_user }}"
   when: sweagle_create_services and sweagle_version is version_compare('3.13', '>=')
   tags: [ sweagle, sweagle-core ]
+  become: true
 
 - name: Create service core (version>=3.13)
   shell: "{{ sweagle_installation_folder }}/scripts/createService_v2.sh sweagleCore {{ sweagle_installation_folder }}/bin/core core-{{ sweagle_version }}.jar {{ jdk_install_dir }}/bin/java {{ sweagle_core_xmx }}"

@@ -89,7 +89,9 @@
 
 - name: apply selinux policy if active
   include_tasks: "configure-selinux.yml"
-  when: ansible_selinux.status != 'disabled'
+  when:
+    - ansible_os_family == 'RedHat'
+    - ansible_selinux.status != 'disabled'
   tags: mongodb
 
 - name: Configure mongodb

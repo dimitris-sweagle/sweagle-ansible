@@ -24,4 +24,4 @@
 - name: Set elasticsearch.keystore Permissions
   become: yes
   file: state=file path={{ es_conf_dir }}/elasticsearch.keystore owner={{ es_user }} group={{ es_group }}
-  when: es_enable_xpack
+  when: not ansible_check_mode and es_enable_xpack

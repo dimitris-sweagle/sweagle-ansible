@@ -72,10 +72,10 @@ operationProfiling:
   mode: {{ mongodb_operation_profiling_mode }}
 
 {% if mongodb_major_version is version_compare("4.0", ">=") -%}
-cloud:
-  monitoring:
-    free:
-      state: {{ mongodb_cloud_monitoring_free_state }}
+#cloud:
+#  monitoring:
+#    free:
+#      state: {{ mongodb_cloud_monitoring_free_state }}
 {% endif -%}
 
 {% if mongodb_set_parameters -%}

@@ -73,7 +73,8 @@
 # vault login
 
 ## check sweagle working, start non interactive
-#cd /opt/SWEAGLE/scripts
+#cd <your sweagle installation directory>/scripts
+#by default: cd /opt/sweagle/scripts
 #./startCORE.sh
 
 - hosts: webservers

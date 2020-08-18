@@ -13,6 +13,7 @@ It supports :
 - SSL configuration for Nginx
 
 ## Prerequisites:
+- You should run this playbook as root or sudoer user or put sudoer user/password in your inventory file
 - Ansible 2.4 or higher + package sshpass
 - be sure ansible.cfg knows your inventory folder and authorize non ssh checks:
 more /etc/ansible/ansible.cfg
@@ -75,7 +76,7 @@ Tags must be put in lowercase, example to install only MySQL:
 - Ansible 2.4.2, 2.5.1, 2.8.5 and 2.9.6
 - Ubuntu 18.04
 - CentOS 7.6.1810, 7.7
-- Sweagle 3.1, 3.5, 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
+- Sweagle 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
   - for 3.11 and higher, be sure to use GraalVM JDK for ScriptExecutor
   - for 3.13 and higher, be sure to add mysql-connector-java-8.0.13.tar.gz in files folder
 - ElasticSearch 6.6.2 (for SWEAGLE below 3.10), 6.8.6 (for SWEAGLE 3.10 and higher)
@@ -84,7 +85,6 @@ Tags must be put in lowercase, example to install only MySQL:
 ## TROUBLESHOOT
 - Vault 1.1.2 and upper are not supported and doesn't work with SWEAGLE (as of SWEAGLE 3.1.x)
 - Force_local_installation may not work depending on dependencies present or not on target host
-- Settings for ElasticSearch for 3.5.0 requires additional tests
 
 
 ## Todo list
@@ -97,5 +97,3 @@ ex: on MongoDB, when another release is installed, remove it before
   - reproduced on centos 7.x where default mongo is 2.6
 
 - For Vault, read keys* file to add auto-unseal even if install fails after vault init
-
-- Manage also  upgrade of SWEAGLE

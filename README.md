@@ -14,6 +14,7 @@ It supports :
 
 ## Prerequisites:
 - You should run this playbook as root or sudoer user or put sudoer user/password in your inventory file
+- SELinux must be disabled (check with command `sestatus`, you can run system role to disable it, then reboot your server)
 - Ansible 2.4 or higher + package sshpass
 - be sure ansible.cfg knows your inventory folder and authorize non ssh checks:
 more /etc/ansible/ansible.cfg
@@ -65,7 +66,7 @@ Components available are:
 - sweagle (all prerequisites components should be present)
 - sweagle-data (load initial data on existing tenant)
 - sweagle-web (only install the webserver tier - Nginx must be there !)
-- system (install prerequisites libs like unzip, or jq)
+- system (disable SELinux and install prerequisites libs like unzip, or jq)
 - vault
 
 Tags must be put in lowercase, example to install only MySQL:
@@ -73,13 +74,14 @@ Tags must be put in lowercase, example to install only MySQL:
 
 
 ## TESTED ON
-- Ansible 2.4.2, 2.5.1, 2.8.5 and 2.9.6
+- Ansible 2.4.2, 2.5.1, 2.8.5, 2.9.6, 2.9.10
 - Ubuntu 18.04
-- CentOS 7.6.1810, 7.7
+- CentOS 7.6, 7.7, 7.8
 - Sweagle 3.8, 3.9, 3.10, 3.11, 3.12, 3.13
   - for 3.11 and higher, be sure to use GraalVM JDK for ScriptExecutor
   - for 3.13 and higher, be sure to add mysql-connector-java-8.0.13.tar.gz in files folder
-- ElasticSearch 6.6.2 (for SWEAGLE below 3.10), 6.8.6 (for SWEAGLE 3.10 and higher)
+- ElasticSearch 6.6.2 (for SWEAGLE below 3.10), 6.8.6 (for SWEAGLE 3.10 to 3.13), 6.8.12 (for SWEAGLE 3.13 and higher)
+- Mongo 3.6 (for SWEAGLE until 3.13), 4.0.20 (for SWEAGLE 3.13 and higher)
 
 
 ## TROUBLESHOOT

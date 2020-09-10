@@ -4,13 +4,15 @@ Create a folder for these components to put their packages
 
 - jdk: you should have <ins>ONLY ONE</ins> jdk package in gz format
   - since 3.10, script executor will rely on GraalVM jdk (jdk1.8 v19.2 or higher)
-  - other components still rely on JDK 1.8 (for openJDK taken from https://adoptopenjdk.net/releases.html)
+  - other components still rely on JDK 1.8 (for openJDK taken from https://adoptopenjdk.net/releases.html) or can work with GraalVM
+  - so, if you plan to install on a single host, it is recommended to keep only GraalVM jdk
 
 - <OS family> = Debian
       - all Debian family (Ubuntu, ...) DEB packages
 
 - <OS family> = RedHat
       - all Red Hat Family (Rhel, CentOS, Fedora) RPM packages
+      - this should be the RPM packages linked to your OS version
 
 - <OS family>/: in root folder of the OS family, you should have
       - unzip (required to install vault and SWEAGLE)
@@ -27,7 +29,7 @@ Create a folder for these components to put their packages
       - /prereqs/* (all packages required for list below)
       - mongodb-org-server
       - mongodb-org-shell
-      - policycoreutils-python-2.5-33.el7.x86_64
+      - policycoreutils-python-2.5-34.el7.x86_64
       - python-pymongo
 
 - <OS family>/mysql: you should have (in this order)

@@ -2,6 +2,7 @@
 # Install JDK
 - name: Install jdk 1.8 from local
   when: force_local_installation
+  become: true
   tags: jdk
   block:
     - name: Create installation folder "{{ jdk_install_dir }}"

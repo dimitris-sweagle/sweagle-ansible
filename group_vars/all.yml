@@ -6,10 +6,6 @@ force_local_installation: true
 # Root folder that will be used for sweagle, elasticsearch, jdk, mongo data and log, and vault installation
 root_installation_folder: "/opt"
 
-# Variable to set if RHEL SELinux is enabled
-# check if we cannot detect this automatically from a system variable ?
-system_sel_enabled: false
-
 # Shared SWEAGLE variables
 sweagle_version: "3.13.0"
 sweagle_installation_folder: "{{ root_installation_folder }}/sweagle"

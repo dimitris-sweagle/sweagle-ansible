@@ -31,6 +31,7 @@
 #  tags: mysql
 
 # Set root password for MySQL >= 5.7.x.
+# new connection to test:   mysql --socket "{{ mysql_socket }}" -u "{{ mysql_root_user }}" -NBe
 - name: Update MySQL root password for localhost root account (5.7.x).
   shell: >
     mysql -u {{ mysql_root_user }} -NBe
@@ -41,6 +42,8 @@
   when: mysql_root_password_update
     and ('5.7.' in mysql_cli_version.stdout or '8.0.' in mysql_cli_version.stdout)
     and ansible_os_family == "Debian"
+  # Ignore errors for this task as maybe user password has already been updated in previous run
+  ignore_errors: true
   tags: mysql
 
 # Set root password for MySQL < 5.7.x.

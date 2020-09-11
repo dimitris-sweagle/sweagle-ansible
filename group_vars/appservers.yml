@@ -1,8 +1,8 @@
 ---
 jdk_install_dir: "/{ root_installation_folder }}/jdk"
 
-vault_version: "0.7.2"
-# WARNING: SWEAGLE not compatible with latest vault 1.1.2
+vault_version: "1.0.3"
+# WARNING: SWEAGLE compatible only to Vault 0.7.x to 1.0.x
 vault_backend: mysql
 vault_port: "{{ sweagle_vault_port|default(8200) }}"
 # vault_copy_key: if true, will copy tokens obtained after init to a txt file in vault conf dir

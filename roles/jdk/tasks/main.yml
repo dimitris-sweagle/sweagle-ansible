@@ -44,22 +44,13 @@
       with_items:
           - jar
           - java
-#- name: Install jdk 1.8 for Debian from local packages
-#  apt:
-#    deb: "{{ item }}"
-#  become: true
-#  with_items: "{{ lookup('fileglob', '../../../files/jdk/*_amd64.deb').split(',') | sort }}"
-#  when: force_local_installation
-#  tags: jdk
 
-#- name: Install jdk 1.8 for Red Hat from local packages
-#  package:
-#    name: "{{ item }}"
-#    state: present
-#  become: true
-#  with_items: "{{ lookup('fileglob', '../../../files/jdk/*.rpm').split(',') | sort }}"
-#  when: force_local_installation and ansible_os_family == 'RedHat'
-#  tags: jdk
+    - name: Create java symbolic link
+      file:
+        src: "{{jdk_install_dir}}/bin/java"
+        dest: "/usr/bin/java"
+        state: link
+      ignore_errors: true
 
 - name: Install jdk 1.8 from repo
   when: not force_local_installation

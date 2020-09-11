@@ -67,10 +67,22 @@
   when: sweagle_create_services and sweagle_version is version_compare('3.13', '>=')
   tags: [ sweagle, sweagle-core ]
 
+- name: Display service creation command (>=3.13)
+  debug:
+    msg: "{{ sweagle_installation_folder }}/scripts/createService_v2.sh sweagleCore {{ sweagle_installation_folder }}/bin/core core-{{ sweagle_version }}.jar {{ sweagle_core_xmx }}"
+  when: sweagle_create_services and sweagle_version is version_compare('3.13', '>=')
+  tags: [ sweagle, sweagle-core ]
+
 - name: Create service core (version>=3.13)
-  shell: "{{ sweagle_installation_folder }}/scripts/createService_v2.sh sweagleCore {{ sweagle_installation_folder }}/bin/core core-{{ sweagle_version }}.jar {{ jdk_install_dir }}/bin/java {{ sweagle_core_xmx }}"
+  shell: "{{ sweagle_installation_folder }}/scripts/createService_v2.sh sweagleCore {{ sweagle_installation_folder }}/bin/core core-{{ sweagle_version }}.jar {{ sweagle_core_xmx }}"
   become: true
   when: sweagle_create_services and sweagle_version is version_compare('3.13', '>=')
+  tags: [ sweagle, sweagle-core ]
+
+- name: Display service creation command (<3.13)
+  debug:
+    msg: "{{ sweagle_installation_folder }}/scripts/createService.sh sweagleCore {{ sweagle_installation_folder }}/bin/core core-{{ sweagle_version }}.jar {{ sweagle_core_xmx }}"
+  when: sweagle_create_services and sweagle_version is version_compare('3.13', '<')
   tags: [ sweagle, sweagle-core ]
 
 - name: Create service core (version<3.13)

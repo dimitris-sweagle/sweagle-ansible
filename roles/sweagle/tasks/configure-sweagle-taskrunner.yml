@@ -5,6 +5,12 @@
     dest: "{{ sweagle_installation_folder }}/bin/taskRunner/application.yml"
   tags: [ sweagle, sweagle-taskrunner ]
 
+- name: Display service creation command
+  debug:
+    msg: "{{ sweagle_installation_folder }}/scripts/createService.sh sweagleTaskRunner {{ sweagle_installation_folder }}/bin/taskRunner task-runner-1.0.0.jar {{ sweagle_taskrunner_xmx }}"
+  when: sweagle_create_services
+  tags: [ sweagle, sweagle-taskrunner ]
+
 - name: Create service taskrunner
   shell: "{{ sweagle_installation_folder }}/scripts/createService.sh sweagleTaskRunner {{ sweagle_installation_folder }}/bin/taskRunner task-runner-1.0.0.jar {{ sweagle_taskrunner_xmx }}"
   become: true

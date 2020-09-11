@@ -82,11 +82,13 @@ Tags must be put in lowercase, example to install only MySQL:
   - for 3.13 and higher, be sure to add mysql-connector-java-8.0.13.tar.gz in files folder
 - ElasticSearch 6.6.2 (for SWEAGLE below 3.10), 6.8.6 (for SWEAGLE 3.10 to 3.13), 6.8.12 (for SWEAGLE 3.13 and higher)
 - Mongo 3.6 (for SWEAGLE until 3.13), 4.0.20 (for SWEAGLE 3.13 and higher)
+- Vault 0.7.2 and 1.0.3
 
 
 ## TROUBLESHOOT
-- Vault 1.1.2 and upper are not supported and doesn't work with SWEAGLE (as of SWEAGLE 3.1.x)
+- Vault 1.1.x and upper are not supported and doesn't work with SWEAGLE (as of SWEAGLE 3.1.x)
 - Force_local_installation may not work depending on dependencies present or not on target host
+- Ubuntu 18.04 repository contains only Mongo 3.6, so MongoDB 4.0 can be installed only with local package for this release
 
 
 ## Todo list

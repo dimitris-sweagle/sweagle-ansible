@@ -2,7 +2,7 @@
 - name: Install unzip from repo
   package:
     name: unzip
-    update_cache: yes
+    state: present
   become: true
   when: not force_local_installation
   tags: [ nginx, sweagle, sweagle-web ]
